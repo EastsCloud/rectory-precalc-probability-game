@@ -1,0 +1,147 @@
+<!doctype html>
+
+<html>
+    
+    <head>
+        
+        <meta charset="utf-8">
+        <title>NB Probability Game</title>
+        
+        <style>
+            
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            
+            #game {
+                display: none;
+            }
+            
+            #clicker {
+                width: 70vh;
+                height: 70vh;
+                border-radius: 50%;
+                font-size: 100px;
+                position: absolute;
+                top: 90px;
+                left: 200px;
+            }
+            
+            #switcher {
+                width: 30vw;
+                height: 30vh;
+                font-size: 70px;
+            }
+            
+            #player {
+                border: solid;
+                width: 30vw;
+                height: 80vh;
+                display: inline-block;
+                position: absolute;
+                top: 50px;
+                left: 800px;
+            }
+            
+            .player_display {
+                font-size: 70px;
+                margin-top: 17vh;
+                text-align: center;
+            }
+            
+            #name2 {
+                display: none;
+            }
+            
+            #setup {
+                border: solid;
+                width: 50vw;
+                height: 80vh;
+                position: absolute;
+                top: 60px;
+                left: 300px;
+            }
+            
+            .name_input {
+                margin-bottom: 20px;
+                width: 30vw;
+                height: 5vh;
+                position: relative;
+                top: 180px;
+                left: 150px;
+            }
+            
+            #confirm_setup {
+                width: 30.3vw;
+            }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <div id="setup">
+            <input id="name1_input" class="name_input" type="text" placeholder="Enter player1's name..." />
+            <input id="name2_input" class="name_input" type="text" placeholder="Enter player2's name..." />
+            <input id="confirm_setup" class="name_input" type="button" value="Start" onclick="start()" />
+        </div>
+        <div id="game">
+            <input id="clicker" type="button" value="0" onclick="increase()" />
+            <div id="player">
+                <input id="switcher" type="button" value="Switch" onclick="switch_player()" />
+                <div id="name1" class="player_display"></div>
+                <div id="name2" class="player_display"></div>
+            </div>
+        </div>
+            
+        
+        <script>
+            
+            const setup = document.getElementById("setup");
+            const n1i = document.getElementById("name1_input");
+            const n2i = document.getElementById("name2_input");
+            const game = document.getElementById("game");
+            const clicker = document.getElementById("clicker");
+            const switcher = document.getElementById("switcher");
+            const name1 = document.getElementById("name1");
+            const name2 = document.getElementById("name2");
+            var current_player = 1;
+            
+            function start(){
+                setup.style.display = "none";
+                game.style.display = "block";
+                name1.innerText = n1i.value;
+                name2.innerText = n2i.value;
+            }
+            
+            function increase(){
+                let v = parseInt(clicker.value)+1;
+                if(v <= 100) {
+                    clicker.value = v.toString();
+                }
+                else{
+                    if(current_player == 1) alert(name1.innerText+"win!");
+                    else alert(name2.innerText+" win!");
+                }
+            }
+            
+            function switch_player(){
+                if(current_player == 1){
+                    name1.style.display = "none";
+                    name2.style.display = "block";
+                    current_player = 2;
+                }
+                else{
+                    name1.style.display = "block";
+                    name2.style.display = "none";
+                    current_player = 1;
+                }
+            }
+            
+        </script>
+        
+    </body>
+    
+</html>
